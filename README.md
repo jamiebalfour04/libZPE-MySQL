@@ -1,0 +1,1 @@
+Simply add the JAR file to the native-plugins folder to add it to ZPE. Call the main function from it with the mysql_connect function with parameters that specify : _host_, _database_, _username_, _password_.  
