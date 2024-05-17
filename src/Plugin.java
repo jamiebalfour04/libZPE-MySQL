@@ -11,7 +11,7 @@ import java.util.Map;
 public class Plugin implements ZPELibrary {
 
   @Override
-  public ZPECustomFunction[] functions() {
+  public ZPECustomFunction[] GetFunctions() {
 
     ZPECustomFunction[] arr = new ZPECustomFunction[1];
     arr[0] = new MySQLConnect();
@@ -99,7 +99,7 @@ public class Plugin implements ZPELibrary {
   }
 
   @Override
-  public Map<String, Class<?>> objects() {
+  public Map<String, Class<?>> GetObjects() {
     return null;
   }
 
