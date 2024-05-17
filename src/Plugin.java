@@ -105,7 +105,7 @@ public class Plugin implements ZPELibrary {
 
   @Override
   public String GetName() {
-    return "LibPrint";
+    return "libZPEMySQL";
   }
 
   @Override
