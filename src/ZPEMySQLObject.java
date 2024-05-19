@@ -3,11 +3,13 @@ import jamiebalfour.zpe.core.ZPEObject;
 import jamiebalfour.zpe.core.ZPERuntimeEnvironment;
 import jamiebalfour.zpe.interfaces.ZPEPropertyWrapper;
 
+import java.io.Serial;
 import java.sql.SQLException;
 import java.util.HashMap;
 
 public class ZPEMySQLObject extends ZPEObject {
 
+  @Serial
   private static final long serialVersionUID = 5811011685776858084L;
 
   MySQLAccess sql;
@@ -92,8 +94,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
     @Override
     public String[] getParameterNames() {
-      String[] l = {};
-      return l;
+      return new String[]{};
     }
 
     @Override
@@ -122,8 +123,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
     @Override
     public String[] getParameterNames() {
-      String[] l = {"query_str"};
-      return l;
+      return new String[]{"query_str"};
     }
 
     @Override
@@ -134,9 +134,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
         jamiebalfour.parsers.json.ZenithJSONParser parser = new jamiebalfour.parsers.json.ZenithJSONParser();
 
-        String out = parser.jsonEncode(l);
-
-        return out;
+        return parser.jsonEncode(l);
       } catch (Exception e) {
         return false;
       }
@@ -158,8 +156,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
     @Override
     public String[] getParameterNames() {
-      String[] l = {"table"};
-      return l;
+      return new String[]{"table"};
     }
 
     @Override
@@ -188,8 +185,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
     @Override
     public String[] getParameterNames() {
-      String[] l = {"query_str"};
-      return l;
+      return new String[]{"query_str"};
     }
 
     @Override
@@ -218,8 +214,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
     @Override
     public String[] getParameterNames() {
-      String[] l = {"query_str"};
-      return l;
+      return new String[]{"query_str"};
     }
 
     @Override
@@ -245,7 +240,7 @@ public class ZPEMySQLObject extends ZPEObject {
     @Override
     public String getName() {
       // TODO Auto-generated method stub
-      return null;
+      return "prepare";
     }
 
   }

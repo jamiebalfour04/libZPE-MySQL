@@ -1,16 +1,17 @@
+import java.io.Serial;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import jamiebalfour.zpe.core.ZPERuntimeEnvironment;
 import jamiebalfour.zpe.types.ZPEMap;
-import jamiebalfour.zpe.core.YASSInteractiveInterpreter;
 import jamiebalfour.zpe.core.ZPE;
 import jamiebalfour.zpe.core.ZPEObject;
 import jamiebalfour.zpe.interfaces.ZPEPropertyWrapper;
 
 public class ZPEMySQLPreparedStatementObject extends ZPEObject {
 
+  @Serial
   private static final long serialVersionUID = 2761046969467723101L;
 
   PreparedStatement preparedStatement;
@@ -30,34 +31,33 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
   //This is here so that it can be set when the prepared query object is created
   void prepare(String query) {
     placeholders = new ArrayList<String>();
-    String output_query = "";
+    StringBuilder output_query = new StringBuilder();
     try {
 
       //Split on : so that we can replace them with our values
       for (int i = 0; i < query.length(); i++) {
         if(query.charAt(i) == ':') {
           int x = 1;
-          String word = ":";
+          StringBuilder word = new StringBuilder(":");
           while(i + x < query.length() && (query.charAt(i + x) != ' ' && query.charAt(i + x) != ';' && query.charAt(i + x) != ':')){
-            word += query.charAt(i+x);
+            word.append(query.charAt(i + x));
             x++;
 
           }
 
           //We need to store the placeholders then replace them with ?
-          placeholders.add(word);
+          placeholders.add(word.toString());
           i = i + x;
-          output_query += "? ";
+          output_query.append("? ");
         } else {
-          output_query += query.charAt(i);
+          output_query.append(query.charAt(i));
         }
 
       }
 
 
-      preparedStatement = sqlConn.sql.connection.prepareStatement(output_query);
+      preparedStatement = sqlConn.sql.connection.prepareStatement(output_query.toString());
     } catch (Exception e) {
-      System.out.println(e);
       System.out.println(e.getMessage());
       ZPE.PrintWarning("Statement could not be prepared.");
     }
@@ -68,8 +68,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
 
     @Override
     public String[] getParameterNames() {
-      String[] l = {"query_str"};
-      return l;
+      return new String[]{"query_str"};
     }
 
     @Override
@@ -100,8 +99,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
 
     @Override
     public String[] getParameterNames() {
-      String[] l = {"values"};
-      return l;
+      return new String[]{"values"};
     }
 
     @Override
@@ -127,7 +125,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
         return sqlConn.sql.executePreparedStatement(preparedStatement);
 
       } catch (Exception e) {
-        System.out.println(e);
+        System.out.println(e.getMessage());
         return false;
       }
     }
