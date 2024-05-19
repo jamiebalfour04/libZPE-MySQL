@@ -2,6 +2,7 @@ import jamiebalfour.HelperFunctions;
 import jamiebalfour.zpe.core.YASSByteCodes;
 import jamiebalfour.zpe.core.YASSInteractiveInterpreter;
 import jamiebalfour.zpe.core.ZPERuntimeEnvironment;
+import jamiebalfour.zpe.core.ZPEStructure;
 import jamiebalfour.zpe.interfaces.ZPECustomFunction;
 import jamiebalfour.zpe.interfaces.ZPELibrary;
 
@@ -11,50 +12,47 @@ import java.util.Map;
 public class Plugin implements ZPELibrary {
 
   @Override
-  public ZPECustomFunction[] GetFunctions() {
-
-    ZPECustomFunction[] arr = new ZPECustomFunction[1];
-    arr[0] = new MySQLConnect();
+  public Map<String, ZPECustomFunction> getFunctions() {
+    HashMap<String, ZPECustomFunction> arr = new HashMap<String, ZPECustomFunction>();
+    arr.put("mysql_connect", new MySQLConnect());
     return arr;
   }
 
-  public class MySQLConnect implements jamiebalfour.zpe.interfaces.ZPECustomFunction{
+  @Override
+  public Map<String, Class<? extends ZPEStructure>> getObjects() {
+    return null;
+  }
+
+  @Override
+  public String getName() {
+    return "libZPEMySQL";
+  }
+
+  @Override
+  public String getVersionInfo() {
+    return "1.0";
+  }
+
+  public static class MySQLConnect implements jamiebalfour.zpe.interfaces.ZPECustomFunction{
 
     @Override
-    public String CommandString() {
+    public String getManualEntry() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public String getManualHeader() {
       return "mysql_connect";
     }
 
     @Override
-    public String ConvertToLanguage(String arg0, String arg1) {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public String ImportLines(String arg0) {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public String ManualEntry() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public String ManualHeader() {
-      return "mysql_connect";
-    }
-
-    @Override
-    public int MinimumParameters() {
+    public int getMinimumParameters() {
       return 4;
     }
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] params = new String[5];
       params[0] = "host";
       params[1] = "database";
@@ -87,29 +85,15 @@ public class Plugin implements ZPELibrary {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 3;
     }
 
     @Override
-    public byte ReturnType() {
+    public byte getReturnType() {
       return YASSByteCodes.MIXED_TYPE;
     }
 
   }
 
-  @Override
-  public Map<String, Class<?>> GetObjects() {
-    return null;
-  }
-
-  @Override
-  public String GetName() {
-    return "libZPEMySQL";
-  }
-
-  @Override
-  public String GetVersionInfo() {
-    return "1.0";
-  }
 }
