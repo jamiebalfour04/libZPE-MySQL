@@ -2,7 +2,7 @@
   <artifact type="jar" name="libZPEMySQL">
     <output-path>$USER_HOME$/Dropbox/Programs/JARs</output-path>
     <root id="archive" name="libZPEMySQL.jar">
-      <element id="module-output" name="libZPEMySQL" />
+      <element id="module-output" name="libZPE-MySQL" />
       <element id="library" level="project" name="mysql-connector-j-8.4.0" />
     </root>
   </artifact>

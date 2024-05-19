@@ -67,7 +67,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
   class prepare_Command implements jamiebalfour.zpe.interfaces.ZPEObjectNativeMethod {
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] l = {"query_str"};
       return l;
     }
@@ -84,12 +84,12 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 0;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       return "prepare";
     }
 
@@ -99,7 +99,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
   class execute_Command implements jamiebalfour.zpe.interfaces.ZPEObjectNativeMethod {
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] l = {"values"};
       return l;
     }
@@ -133,12 +133,12 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 0;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       return "execute";
     }
 

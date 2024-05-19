@@ -49,7 +49,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] params = new String[5];
       params[0] = "host";
       params[1] = "database";
@@ -76,12 +76,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 0;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       return "connect";
     }
 
@@ -91,7 +91,7 @@ public class ZPEMySQLObject extends ZPEObject {
   class get_tables_Command implements jamiebalfour.zpe.interfaces.ZPEObjectNativeMethod {
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] l = {};
       return l;
     }
@@ -107,12 +107,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 3;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       return "get_tables";
     }
 
@@ -121,7 +121,7 @@ public class ZPEMySQLObject extends ZPEObject {
   class query_to_json_Command implements jamiebalfour.zpe.interfaces.ZPEObjectNativeMethod {
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] l = {"query_str"};
       return l;
     }
@@ -143,12 +143,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 0;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       return "query_to_json";
     }
 
@@ -157,7 +157,7 @@ public class ZPEMySQLObject extends ZPEObject {
   class get_columns_Command implements jamiebalfour.zpe.interfaces.ZPEObjectNativeMethod {
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] l = {"table"};
       return l;
     }
@@ -173,12 +173,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 0;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       return "get_columns";
     }
 
@@ -187,7 +187,7 @@ public class ZPEMySQLObject extends ZPEObject {
   class query_Command implements jamiebalfour.zpe.interfaces.ZPEObjectNativeMethod {
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] l = {"query_str"};
       return l;
     }
@@ -203,12 +203,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 0;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       return "query";
     }
 
@@ -217,7 +217,7 @@ public class ZPEMySQLObject extends ZPEObject {
   class prepare_Command implements jamiebalfour.zpe.interfaces.ZPEObjectNativeMethod {
 
     @Override
-    public String[] ParameterNames() {
+    public String[] getParameterNames() {
       String[] l = {"query_str"};
       return l;
     }
@@ -238,12 +238,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public int RequiredPermissionLevel() {
+    public int getRequiredPermissionLevel() {
       return 0;
     }
 
     @Override
-    public String name() {
+    public String getName() {
       // TODO Auto-generated method stub
       return null;
     }
