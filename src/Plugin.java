@@ -25,7 +25,7 @@ public class Plugin implements ZPELibrary {
 
   @Override
   public String getName() {
-    return "libZPEMySQL";
+    return "libZPE-MySQL";
   }
 
   @Override
