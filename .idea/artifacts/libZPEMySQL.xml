@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="libZPEMySQL">
+  <artifact type="jar" build-on-make="true" name="libZPEMySQL">
     <output-path>$USER_HOME$/Dropbox/Programs/JARs</output-path>
     <root id="archive" name="libZPE-MySQL.jar">
       <element id="module-output" name="libZPE-MySQL" />

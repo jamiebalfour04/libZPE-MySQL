@@ -37,8 +37,7 @@ public class Plugin implements ZPELibrary {
 
     @Override
     public String getManualEntry() {
-      // TODO Auto-generated method stub
-      return null;
+      return "Creates a new MySQL connection.";
     }
 
     @Override
