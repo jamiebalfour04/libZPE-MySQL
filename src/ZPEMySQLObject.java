@@ -1,13 +1,17 @@
 import jamiebalfour.zpe.core.ZPE;
 import jamiebalfour.zpe.core.ZPEObject;
 import jamiebalfour.zpe.core.ZPERuntimeEnvironment;
+import jamiebalfour.zpe.core.ZPEStructure;
 import jamiebalfour.zpe.interfaces.ZPEPropertyWrapper;
+import jamiebalfour.zpe.interfaces.ZPEType;
+import jamiebalfour.zpe.types.ZPEBoolean;
+import jamiebalfour.zpe.types.ZPEString;
 
 import java.io.Serial;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class ZPEMySQLObject extends ZPEObject {
+public class ZPEMySQLObject extends ZPEStructure {
 
   @Serial
   private static final long serialVersionUID = 5811011685776858084L;
@@ -63,7 +67,7 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
       try {
         String host = parameters.get("host").toString();
         int port = jamiebalfour.HelperFunctions.StringToInteger(parameters.get("port").toString());
@@ -71,9 +75,9 @@ public class ZPEMySQLObject extends ZPEObject {
         String username = parameters.get("user").toString();
         String password = parameters.get("password").toString();
 
-        return ((ZPEMySQLObject) parent).connect(host, port, database, username, password);
+        return new ZPEBoolean(((ZPEMySQLObject) parent).connect(host, port, database, username, password));
       } catch (Exception e) {
-        return false;
+        return new ZPEBoolean(false);
       }
     }
 
@@ -98,12 +102,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
 
       try {
         return sql.getTableNames();
       } catch (Exception e) {
-        return false;
+        return new ZPEBoolean(false);
       }
     }
 
@@ -127,16 +131,16 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
 
       try {
         jamiebalfour.zpe.types.ZPEList l = sql.query(parameters.get("query_str").toString());
 
         jamiebalfour.parsers.json.ZenithJSONParser parser = new jamiebalfour.parsers.json.ZenithJSONParser();
 
-        return parser.jsonEncode(l);
+        return new ZPEString(parser.jsonEncode(l));
       } catch (Exception e) {
-        return false;
+        return new ZPEBoolean(false);
       }
     }
 
@@ -160,12 +164,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
 
       try {
         return sql.getColumnNames(parameters.get("table").toString());
       } catch (Exception e) {
-        return false;
+        return new ZPEBoolean(false);
       }
     }
 
@@ -189,12 +193,12 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
 
       try {
         return sql.query(parameters.get("query_str").toString());
       } catch (Exception e) {
-        return false;
+        return new ZPEBoolean(false);
       }
     }
 
@@ -218,7 +222,7 @@ public class ZPEMySQLObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
 
       try {
         ZPEMySQLPreparedStatementObject prep = new ZPEMySQLPreparedStatementObject(getRuntime(), parent);
@@ -228,7 +232,7 @@ public class ZPEMySQLObject extends ZPEObject {
 
         return prep;
       } catch (Exception e) {
-        return false;
+        return new ZPEBoolean(false);
       }
     }
 

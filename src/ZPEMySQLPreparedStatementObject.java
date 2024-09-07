@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import jamiebalfour.zpe.core.ZPERuntimeEnvironment;
+import jamiebalfour.zpe.core.ZPEStructure;
+import jamiebalfour.zpe.exceptions.ZPERuntimeException;
+import jamiebalfour.zpe.interfaces.ZPEType;
+import jamiebalfour.zpe.types.ZPEBoolean;
 import jamiebalfour.zpe.types.ZPEMap;
 import jamiebalfour.zpe.core.ZPE;
 import jamiebalfour.zpe.core.ZPEObject;
 import jamiebalfour.zpe.interfaces.ZPEPropertyWrapper;
 
-public class ZPEMySQLPreparedStatementObject extends ZPEObject {
+public class ZPEMySQLPreparedStatementObject extends ZPEStructure {
 
   @Serial
   private static final long serialVersionUID = 2761046969467723101L;
@@ -72,7 +76,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
 
       String query = parameters.get("query_str").toString();
 
@@ -103,7 +107,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
 
       try {
 
@@ -125,8 +129,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEObject {
         return sqlConn.sql.executePreparedStatement(preparedStatement);
 
       } catch (Exception e) {
-        System.out.println(e.getMessage());
-        return false;
+        throw new ZPERuntimeException(e.getMessage());
       }
     }
 

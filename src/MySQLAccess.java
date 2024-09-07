@@ -9,6 +9,7 @@ import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
 import jamiebalfour.zpe.types.ZPEMap;
 import jamiebalfour.zpe.types.ZPEList;
+import jamiebalfour.zpe.types.ZPEString;
 
 public class MySQLAccess {
   Connection connection = null;
@@ -98,7 +99,7 @@ public class MySQLAccess {
     resultSet = statement.executeQuery(query);
 
     while (resultSet.next()) {
-      names.add(resultSet.getObject(1).toString());
+      names.add(new ZPEString(resultSet.getObject(1).toString()));
     }
 
     return names;
@@ -115,7 +116,7 @@ public class MySQLAccess {
     ResultSetMetaData rsmd = (ResultSetMetaData) resultSet.getMetaData();
 
     for(int i = 0; i < rsmd.getColumnCount(); i++) {
-      names.add(rsmd.getColumnName(i + 1));
+      names.add(new ZPEString(rsmd.getColumnName(i + 1)));
     }
 
     return names;
@@ -147,7 +148,7 @@ public class MySQLAccess {
       ZPEMap row = new ZPEMap();
       for(int i = 0; i < rsmd.getColumnCount(); i++) {
         String name = rsmd.getColumnName(i + 1);
-        row.put(name, resultSet.getObject(i + 1));
+        row.put(new ZPEString(name), new ZPEString(resultSet.getObject(i + 1).toString()));
       }
       out.add(row);
     }

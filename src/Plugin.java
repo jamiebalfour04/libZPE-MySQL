@@ -1,10 +1,9 @@
 import jamiebalfour.HelperFunctions;
-import jamiebalfour.zpe.core.YASSByteCodes;
-import jamiebalfour.zpe.core.YASSInteractiveInterpreter;
-import jamiebalfour.zpe.core.ZPERuntimeEnvironment;
-import jamiebalfour.zpe.core.ZPEStructure;
+import jamiebalfour.zpe.core.*;
 import jamiebalfour.zpe.interfaces.ZPECustomFunction;
 import jamiebalfour.zpe.interfaces.ZPELibrary;
+import jamiebalfour.zpe.interfaces.ZPEType;
+import jamiebalfour.zpe.types.ZPEBoolean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +62,7 @@ public class Plugin implements ZPELibrary {
     }
 
     @Override
-    public Object MainMethod(HashMap<String, Object> params, ZPERuntimeEnvironment runtime) {
+    public ZPEType MainMethod(HashMap<String, Object> params, ZPERuntimeEnvironment runtime, ZPEFunction zpeFunction) {
 
       String host = params.get("host").toString();
       String db = params.get("database").toString();
@@ -75,11 +74,11 @@ public class Plugin implements ZPELibrary {
         port = HelperFunctions.StringToInteger(params.get("port").toString());
       }
 
-      ZPEMySQLObject o = new ZPEMySQLObject(runtime, runtime.GetCurrentZPEFunction());
+      ZPEMySQLObject o = new ZPEMySQLObject(runtime, zpeFunction);
       if(o.connect(host, port, db, user, password)) {
         return o;
       } else {
-        return false;
+        return new ZPEBoolean(false);
       }
     }
 
