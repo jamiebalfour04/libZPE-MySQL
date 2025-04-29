@@ -71,7 +71,7 @@ public class Plugin implements ZPELibrary {
 
       int port = 8889;
       if(params.containsKey("port")) {
-        port = HelperFunctions.StringToInteger(params.get("port").toString());
+        port = HelperFunctions.stringToInteger(params.get("port").toString());
       }
 
       ZPEMySQLObject o = new ZPEMySQLObject(runtime, zpeFunction);

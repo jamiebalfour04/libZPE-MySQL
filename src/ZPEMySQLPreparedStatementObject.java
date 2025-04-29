@@ -1,4 +1,3 @@
-import java.io.Serial;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,10 +11,10 @@ import jamiebalfour.zpe.types.ZPEMap;
 import jamiebalfour.zpe.core.ZPE;
 import jamiebalfour.zpe.core.ZPEObject;
 import jamiebalfour.zpe.interfaces.ZPEPropertyWrapper;
+import jamiebalfour.generic.BinarySearchTree;
 
 public class ZPEMySQLPreparedStatementObject extends ZPEStructure {
 
-  @Serial
   private static final long serialVersionUID = 2761046969467723101L;
 
   PreparedStatement preparedStatement;
@@ -63,7 +62,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEStructure {
       preparedStatement = sqlConn.sql.connection.prepareStatement(output_query.toString());
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      ZPE.PrintWarning("Statement could not be prepared.");
+      ZPE.printWarning("Statement could not be prepared.");
     }
   }
 
@@ -76,7 +75,7 @@ public class ZPEMySQLPreparedStatementObject extends ZPEStructure {
     }
 
     @Override
-    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(BinarySearchTree<String, ZPEType> parameters, ZPEObject parent) {
 
       String query = parameters.get("query_str").toString();
 
@@ -107,13 +106,13 @@ public class ZPEMySQLPreparedStatementObject extends ZPEStructure {
     }
 
     @Override
-    public ZPEType MainMethod(HashMap<String, ZPEType> parameters, ZPEObject parent) {
+    public ZPEType MainMethod(BinarySearchTree<String, ZPEType> parameters, ZPEObject parent) {
 
       try {
 
 
         if(!(parameters.get("values") instanceof ZPEMap)) {
-          ZPE.PrintError("Not type of ZPEAssociativeArray in prepare query.");
+          ZPE.printError("Not type of ZPEAssociativeArray in prepare query.");
         }
 
         ZPEMap values = (ZPEMap) parameters.get("values");
